@@ -508,7 +508,7 @@ export const tourCategories: TourCategory[] = [
     tours: 11,
     rating: 4.8,
     reviewCount: 187,
-    image: '/src/assets/ladakh.jpg',
+    image: ladakhImg,
     subTours: [
       {
         id: 'ladakh-monasteries',
