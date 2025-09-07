@@ -517,7 +517,7 @@ export const tourCategories: TourCategory[] = [
         price: '€1120 pp',
         rating: 4.9,
         reviewCount: 45,
-        image: ladakhImg,
+        image: ladakhMonasteryImg,
         highlights: ['Ancient monasteries', 'Buddhist culture', 'Mountain landscapes', 'Spiritual journey'],
         itinerary: [{ day: 1, title: 'Leh Arrival', description: 'High altitude acclimatization', activities: ['Rest day', 'Monastery visit'] }]
       },
@@ -539,7 +539,7 @@ export const tourCategories: TourCategory[] = [
         price: '€990 pp',
         rating: 4.8,
         reviewCount: 38,
-        image: ladakhImg,
+        image: ladakhMonasteryImg,
         highlights: ['Cultural heritage', 'Historical sites', 'Traditional life', 'Ancient architecture'],
         itinerary: [{ day: 1, title: 'Heritage Journey', description: 'Cultural exploration', activities: ['Heritage briefing', 'Palace visit'] }]
       },
