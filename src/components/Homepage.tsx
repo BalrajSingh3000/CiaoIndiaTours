@@ -50,7 +50,7 @@ import thailandImg from '@/assets/thailand.jpg';
 import omanImg from '@/assets/oman.jpg';
 import amitImg from '@/assets/amit.jpg';
 import nitishImg from '@/assets/nitish.jpeg';
-import janiceImg from '@/assets/janice.jpg';
+import janiceImg from '@/assets/Janice.jpg';
 import Footer from '@/components/pageFooter';
 
 const Homepage = () => {
