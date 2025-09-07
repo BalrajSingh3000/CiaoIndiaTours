@@ -20,7 +20,7 @@ import orissaImg from '@/assets/orissa.jpg';
 import incredibleIndiaImg from '@/assets/incredible-india.jpg';
 
 //New Photos for gallery
-import andamanImg from '@/assets/ANDAMAN.webp';
+import andamanImg from '@/assets/andaman.webp';
 import banglasahebImg from '@/assets/Banglasaheb.webp';
 import birlamandirImg from '@/assets/Birlamandir-1.webp';
 import camelsImg from '@/assets/camels-2.webp';
