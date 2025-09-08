@@ -5,6 +5,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { supabase } from '@/lib/supabaseClient';
+import { useToast } from '@/hooks/use-toast';
 
 interface QuotationModalProps {
   isOpen: boolean;
@@ -26,6 +28,9 @@ const QuotationModal = ({ isOpen, onClose }: QuotationModalProps) => {
     comments: ''
   });
 
+  const { toast } = useToast();
+  const [submitting, setSubmitting] = useState(false);
+
   const countryCodes = [
     { code: '+1', country: 'United States', flag: '🇺🇸' },
     { code: '+44', country: 'United Kingdom', flag: '🇬🇧' },
@@ -45,10 +50,48 @@ const QuotationModal = ({ isOpen, onClose }: QuotationModalProps) => {
     '5 star hotels'
   ];
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Quotation request:', formData);
-    onClose();
+    if (submitting) return;
+    setSubmitting(true);
+    try {
+      const payload = {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        age: formData.age,
+        category: formData.selectCategory,
+        numberOfTourist: formData.numberOfParticipants,
+        dep: formData.departureDate ? new Date(formData.departureDate) : null,
+        arr: formData.arrivalDate ? new Date(formData.arrivalDate) : null,
+        hotel_type: formData.hotelType,
+        budget: formData.budget,
+        comment: formData.comments,
+      };
+
+      const { error } = await supabase.from('Quotation Form').insert(payload);
+      if (error) throw error;
+
+      toast({ title: 'Quote requested', description: 'We will reach out within 24 hours.' });
+      onClose();
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        age: '',
+        selectCategory: 'Single',
+        numberOfParticipants: '2',
+        arrivalDate: '',
+        departureDate: '',
+        budget: '',
+        hotelType: '',
+        comments: ''
+      });
+    } catch (err: any) {
+      toast({ title: 'Submission failed', description: err.message ?? 'Please try again.' });
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const handleReset = () => {
@@ -328,8 +371,8 @@ const QuotationModal = ({ isOpen, onClose }: QuotationModalProps) => {
                   transition={{ delay: 0.9 }}
                   className="md:col-span-4 flex justify-center gap-4 mt-4"
                 >
-                  <Button type="submit" className="neumorphic-btn text-primary-foreground hover:shadow-glow px-8 py-4 text-lg w-40">
-                    Submit
+                  <Button type="submit" disabled={submitting} className="neumorphic-btn text-primary-foreground hover:shadow-glow px-8 py-4 text-lg w-40">
+                    {submitting ? 'Submitting...' : 'Submit'}
                   </Button>
                   <Button type="button" onClick={handleReset} variant="outline" className="border-white/20 text-foreground hover:bg-white/10 px-8 py-4 text-lg w-40">
                     RESET

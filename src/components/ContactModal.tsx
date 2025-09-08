@@ -5,6 +5,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { supabase } from '@/lib/supabaseClient';
+import { useToast } from '@/hooks/use-toast';
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -19,6 +21,10 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
     countryCode: '+91',
     message: ''
   });
+
+  const { toast } = useToast();
+
+  const [submitting, setSubmitting] = useState(false);
 
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -252,10 +258,29 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
     country.code.includes(searchTerm)
   );
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    onClose();
+    if (submitting) return;
+    setSubmitting(true);
+    try {
+      const payload = {
+        name: formData.name,
+        email: formData.email,
+        phoneNumber: `${formData.countryCode} ${formData.phone}`,
+        Message: formData.message,
+      };
+
+      const { error } = await supabase.from('Contact Us Table').insert(payload);
+      if (error) throw error;
+
+      toast({ title: 'Message sent', description: 'We will get back to you shortly.' });
+      onClose();
+      setFormData({ name: '', email: '', phone: '', countryCode: '+91', message: '' });
+    } catch (err: any) {
+      toast({ title: 'Submission failed', description: err.message ?? 'Please try again later.' });
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -420,8 +445,8 @@ const ContactModal = ({ isOpen, onClose }: ContactModalProps) => {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.8 }}
                     >
-                      <Button type="submit" className="w-full neumorphic-btn text-primary-foreground hover:shadow-glow">
-                        Send Message
+                      <Button type="submit" disabled={submitting} className="w-full neumorphic-btn text-primary-foreground hover:shadow-glow">
+                        {submitting ? 'Sending...' : 'Send Message'}
                       </Button>
                     </motion.div>
                   </form>
