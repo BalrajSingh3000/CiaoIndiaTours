@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Play, Pause } from 'phosphor-react';
 import ciaoVideo from '@/assets/CiaoVideo.mp4';
+import heroPoster from '@/assets/incredible-india.jpg';
 
 interface VideoBackgroundProps {
   children: React.ReactNode;
@@ -12,7 +13,9 @@ const VideoBackground = ({ children }: VideoBackgroundProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [useYouTube, setUseYouTube] = useState(false);
+  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   // Convert YouTube URL to embeddable format
   const getYouTubeEmbedUrl = (url: string) => {
@@ -23,13 +26,26 @@ const VideoBackground = ({ children }: VideoBackgroundProps) => {
   const youtubeUrl = 'https://www.youtube.com/watch?v=_9UtM1Vbqnc';
   const embedUrl = getYouTubeEmbedUrl(youtubeUrl);
 
+  // Defer actual video loading until the hero is in view and the browser is idle
   useEffect(() => {
-    // Simulate video loading
-    const timer = setTimeout(() => {
-      setIsLoaded(true);
-    }, 1000);
+    if (!containerRef.current) return;
 
-    return () => clearTimeout(timer);
+    const onIdle = (cb: () => void) => {
+      // @ts-ignore - requestIdleCallback not in TS lib by default
+      const ric = window.requestIdleCallback || ((fn: Function) => setTimeout(fn as any, 0));
+      ric(() => cb());
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      const entry = entries[0];
+      if (entry && entry.isIntersecting) {
+        onIdle(() => setShouldLoadVideo(true));
+        observer.disconnect();
+      }
+    }, { root: null, rootMargin: '200px', threshold: 0.1 });
+
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
   }, []);
 
   const handleVideoError = () => {
@@ -44,9 +60,20 @@ const VideoBackground = ({ children }: VideoBackgroundProps) => {
   };
 
   return (
-    <div className="relative min-h-screen overflow-hidden">
+    <div ref={containerRef} className="relative min-h-screen overflow-hidden">
       {/* Video Background */}
       <div className="absolute inset-0 z-0">
+        {/* Instant poster image for first paint */}
+        <img
+          src={heroPoster}
+          alt="India background"
+          className="absolute inset-0 w-full h-full object-cover"
+          loading="eager"
+          // @ts-ignore fetchPriority is widely supported but not yet typed
+          fetchpriority="high"
+          style={{ filter: 'brightness(0.45) contrast(1.15)' }}
+        />
+
         {/* Loading overlay */}
         <motion.div
           initial={{ opacity: 1 }}
@@ -59,23 +86,27 @@ const VideoBackground = ({ children }: VideoBackgroundProps) => {
         <div className="relative w-full h-full">
           {!useYouTube ? (
             // Primary: Local Video
-            <video
-              ref={videoRef}
-              className="absolute top-1/2 left-1/2 w-full h-full transform -translate-x-1/2 -translate-y-1/2 object-cover"
-              autoPlay
-              muted
-              loop
-              playsInline
-              onError={handleVideoError}
-              onLoadedData={handleVideoLoad}
-              onCanPlay={handleVideoLoad}
-              style={{ 
-                filter: 'brightness(0.4) contrast(1.2)',
-              }}
-            >
-              <source src={ciaoVideo} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
+            shouldLoadVideo && (
+              <video
+                ref={videoRef}
+                className="absolute top-1/2 left-1/2 w-full h-full transform -translate-x-1/2 -translate-y-1/2 object-cover"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="none"
+                poster={heroPoster}
+                onError={handleVideoError}
+                onLoadedData={handleVideoLoad}
+                onCanPlay={handleVideoLoad}
+                style={{ 
+                  filter: 'brightness(0.4) contrast(1.2)',
+                }}
+              >
+                <source src={ciaoVideo} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            )
           ) : (
             // Fallback: YouTube Video
             <iframe
