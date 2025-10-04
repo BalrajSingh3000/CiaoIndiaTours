@@ -22,12 +22,9 @@ export default defineConfig(({ mode }) => ({
   build: {
     // Performance optimizations
     target: 'es2015',
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true,
-      },
+    minify: 'esbuild',
+    esbuild: {
+      drop: ['console', 'debugger'],
     },
     rollupOptions: {
       output: {
@@ -43,6 +40,9 @@ export default defineConfig(({ mode }) => ({
     sourcemap: false,
     // Optimize chunk size
     chunkSizeWarningLimit: 1000,
+    // Ensure compatibility with Vercel
+    outDir: 'dist',
+    assetsDir: 'assets',
   },
   // Optimize dependencies
   optimizeDeps: {
@@ -58,5 +58,9 @@ export default defineConfig(({ mode }) => ({
   // CSS optimization
   css: {
     devSourcemap: true,
+  },
+  // Vercel-specific optimizations
+  define: {
+    'process.env.NODE_ENV': JSON.stringify(mode),
   },
 }));

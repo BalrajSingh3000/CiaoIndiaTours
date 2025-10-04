@@ -1,10 +1,10 @@
 export const seoConfig = {
   siteName: 'Ciao India Tours',
-  siteUrl: 'https://ciaoindiatours.com',
+  siteUrl: 'https://ciaoindiatour.co.in',
   defaultTitle: 'Ciao India Tours - Premium Luxury Travel & Tour Packages in India | Ciao India Tour',
   defaultDescription: 'Ciao India Tours offers premium, tailor-made luxury travel experiences across India. Expert local guides, 100% customized itineraries for Golden Triangle, Rajasthan, Kerala, Ladakh & more. Book your dream India tour today!',
   defaultKeywords: 'Ciao India Tours, Ciao India Tour, India travel packages, luxury India tours, Golden Triangle tour, Rajasthan tour, Kerala backwaters, Ladakh tour, custom India travel, premium India tours, India travel agency, tailor-made India tours',
-  defaultImage: 'https://ciaoindiatours.com/assets/taj-mahal-sunrise.jpg',
+  defaultImage: 'https://ciaoindiatour.co.in/assets/taj-mahal-sunrise.jpg',
   twitterHandle: '@CiaoIndiaTours',
   facebookAppId: 'your-facebook-app-id',
   
@@ -113,9 +113,9 @@ export const seoConfig = {
       '@type': 'TravelAgency',
       name: 'Ciao India Tours',
       alternateName: 'Ciao India Tour',
-      url: 'https://ciaoindiatours.com',
-      logo: 'https://ciaoindiatours.com/assets/ciao-logo.png',
-      image: 'https://ciaoindiatours.com/assets/taj-mahal-sunrise.jpg',
+      url: 'https://ciaoindiatour.co.in',
+      logo: 'https://ciaoindiatour.co.in/assets/ciao-logo.png',
+      image: 'https://ciaoindiatour.co.in/assets/taj-mahal-sunrise.jpg',
       telephone: '+91-XXXXXXXXXX',
       email: 'info@ciaoindiatours.com',
       address: {
