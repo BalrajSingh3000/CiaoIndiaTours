@@ -30,6 +30,7 @@ import SubTourGrid from './SubTourGrid';
 import FestivalsCarousel from './FestivalsCarousel';
 import CustomerReviews from './CustomerReviews';
 import PremiumGallery from './PremiumGallery';
+import SEOHead from './SEOHead';
 import { tourCategories } from '@/data/tourData';
 
 // Import all assets
@@ -107,31 +108,41 @@ const Homepage = () => {
 
   const faqData = [
     {
-      question: "What makes Ciao India Tours different from other travel agencies?",
-      answer: "We are a local Indian travel agency registered with the Government of India, offering 100% tailor-made trips without intermediaries. Our professionals speak multiple foreign languages and provide 24/7 support with guaranteed best prices in the industry."
+      question: "What makes Ciao India Tours different from other India travel agencies?",
+      answer: "Ciao India Tours is a local Indian travel agency registered with the Government of India, offering 100% tailor-made luxury trips without intermediaries. Our professionals speak multiple foreign languages and provide 24/7 support with guaranteed best prices for India tour packages."
     },
     {
-      question: "How quickly can I receive a travel quote?",
-      answer: "We guarantee to provide detailed travel quotes within 24 hours of your inquiry. Our expert team works around the clock to ensure quick response times and accurate pricing for your dream trip to India."
+      question: "How quickly can I receive a Ciao India Tours travel quote?",
+      answer: "We guarantee to provide detailed travel quotes within 24 hours of your inquiry. Our expert team works around the clock to ensure quick response times and accurate pricing for your dream India tour with Ciao India Tours."
     },
     {
-      question: "Do you offer completely customized itineraries?",
-      answer: "Absolutely! Every trip with Ciao India Tours is 100% tailor-made according to your preferences, budget, and interests. We don't believe in one-size-fits-all packages and create unique experiences for each traveler."
+      question: "Do you offer completely customized India tour itineraries?",
+      answer: "Absolutely! Every trip with Ciao India Tours is 100% tailor-made according to your preferences, budget, and interests. We don't believe in one-size-fits-all packages and create unique luxury travel experiences for each traveler across India."
     },
     {
-      question: "What languages do your travel experts speak?",
-      answer: "Our multilingual team speaks several foreign languages including Italian, Spanish, French, German, Russian, and Portuguese, in addition to English and local Indian languages."
+      question: "What languages do your Ciao India Tours travel experts speak?",
+      answer: "Our multilingual team at Ciao India Tours speaks several foreign languages including Italian, Spanish, French, German, Russian, and Portuguese, in addition to English and local Indian languages for seamless communication."
     },
     {
-      question: "Is it safe to travel with Ciao India Tours?",
-      answer: "Safety is our top priority. We ensure safe journeys with vetted accommodations, reliable transportation, local guides, and 24/7 support throughout your trip. We are a government-registered agency with proper licensing and insurance."
+      question: "Is it safe to travel with Ciao India Tours in India?",
+      answer: "Safety is our top priority at Ciao India Tours. We ensure safe journeys with vetted accommodations, reliable transportation, expert local guides, and 24/7 support throughout your India tour. We are a government-registered agency with proper licensing and insurance."
+    },
+    {
+      question: "What are the most popular Ciao India Tours packages?",
+      answer: "Our most popular India tour packages include the Golden Triangle tour (Delhi, Agra, Jaipur), Rajasthan heritage tours, Kerala backwaters tours, Ladakh adventure tours, and South India cultural tours. All packages are customizable to your preferences."
+    },
+    {
+      question: "Do you provide local guides for Ciao India Tours?",
+      answer: "Yes! Ciao India Tours provides expert local guides who are knowledgeable about India's history, culture, and hidden gems. Our guides speak multiple languages and ensure you have an authentic and enriching travel experience."
     },
   ];
 
   return (
     <div className="min-h-screen">
+      <SEOHead />
       {/* Hero Section with Video Background */}
-      <section id="home" className="relative">
+      <main>
+        <section id="home" className="relative" aria-label="Ciao India Tours - Premium India Travel Experiences">
         <VideoBackground>
           <div className="min-h-screen flex items-center justify-center px-0">
             <div className="text-center max-w-4xl mx-auto px-6">
@@ -148,7 +159,7 @@ const Homepage = () => {
                   </span>
                 </h1>
                 <p className="text-xl md:text-2xl text-muted-foreground font-light leading-relaxed max-w-2xl mx-auto">
-                  Discover the magic of India with our premium, tailor-made journeys crafted by the experts
+                  Discover the magic of India with <strong>Ciao India Tours</strong> - premium, tailor-made luxury travel experiences crafted by expert local guides
                 </p>
               </motion.div>
               
@@ -171,12 +182,12 @@ const Homepage = () => {
         </VideoBackground>
       </section>
 
-      {/* Our Expertise Section */}
-      <ExpertiseSection onAskQuote={() => setIsQuotationModalOpen(true)}
-        onContactExpert={() => setIsContactModalOpen(true)}/>
+        {/* Our Expertise Section */}
+        <ExpertiseSection onAskQuote={() => setIsQuotationModalOpen(true)}
+          onContactExpert={() => setIsContactModalOpen(true)}/>
 
-      {/* How It Works Section */}
-      <section id="how-it-works" className="py-24 px-0 bg-card/20">
+        {/* How It Works Section */}
+        <section id="how-it-works" className="py-24 px-0 bg-card/20" aria-label="How Ciao India Tours Works">
         <div className="max-w-6xl mx-auto px-6">
           <motion.div
             style={{ y: y2 }}
@@ -184,7 +195,7 @@ const Homepage = () => {
             className="text-center mb-16 mt-24"
           >
             <h2 className="text-4xl md:text-5xl font-light tracking-tighter text-foreground mb-6">
-              How It <span className="text-primary font-medium">Works</span>
+              How <span className="text-primary font-medium">Ciao India Tours</span> Works
             </h2>
             <div className="w-24 h-1 bg-gradient-primary mx-auto rounded-full mb-8"></div>
           </motion.div>
@@ -235,19 +246,19 @@ const Homepage = () => {
         </div>
       </section>
 
-      {/* Tours Section */}
-      <section id="tours" className="py-24 px-0">
+        {/* Tours Section */}
+        <section id="tours" className="py-24 px-0" aria-label="Ciao India Tours Packages">
         <div className="max-w-7xl mx-auto px-6">
           <motion.div
             data-aos="fade-up"
             className="text-center mb-16"
           >
             <h2 className="text-4xl md:text-5xl font-light tracking-tighter text-foreground mb-6">
-              Our <span className="text-primary font-medium">Tours</span>
+              Our <span className="text-primary font-medium">India Tour Packages</span>
             </h2>
             <div className="w-24 h-1 bg-gradient-primary mx-auto rounded-full mb-8"></div>
             <p className="text-xl text-muted-foreground font-light max-w-2xl mx-auto">
-              Explore our curated collection of premium travel experiences across India and beyond
+              Explore our curated collection of premium <strong>Ciao India Tours</strong> experiences across India and beyond - from Golden Triangle to Kerala backwaters
             </p>
           </motion.div>
 
@@ -284,22 +295,22 @@ const Homepage = () => {
         </div>
       </section>
 
-      {/* Festivals Section */}
-      <FestivalsCarousel />
+        {/* Festivals Section */}
+        <FestivalsCarousel />
 
-      {/* Customer Reviews Section */}
-      <CustomerReviews />
+        {/* Customer Reviews Section */}
+        <CustomerReviews />
 
-      {/* Premium Gallery Section */}
-      <PremiumGallery />
+        {/* Premium Gallery Section */}
+        <PremiumGallery />
 
-      {/* About Us Section */}
-      <section id="about" className="py-20 relative">
+        {/* About Us Section */}
+        <section id="about" className="py-20 relative" aria-label="About Ciao India Tours">
         <div className="max-w-7xl mx-auto px-6">
           {/* Header */}
           <div className="text-center mb-16" data-aos="fade-up">
             <h2 className="text-4xl md:text-5xl font-light tracking-tighter text-foreground mb-6">
-              About <span className="text-primary font-medium">Us</span>
+              About <span className="text-primary font-medium">Ciao India Tours</span>
             </h2>
             <div className="w-24 h-1 bg-gradient-primary mx-auto rounded-full mb-8"></div>
           </div>
@@ -314,7 +325,7 @@ const Homepage = () => {
                 </h3>
                 <div className="space-y-6 text-foreground/80 font-light leading-relaxed">
                   <p>
-                  Travel is more than sightseeing—it's embarking on new adventures, gaining fresh perspectives, and deeply engaging with cultures to understand and empathize rather than just observe. If you seek to redefine your travel experience, we are here for you.
+                  Travel is more than sightseeing—it's embarking on new adventures, gaining fresh perspectives, and deeply engaging with cultures to understand and empathize rather than just observe. If you seek to redefine your travel experience with <strong>Ciao India Tours</strong>, we are here for you.
                   </p>
                 </div>
               </div>
@@ -341,7 +352,7 @@ const Homepage = () => {
                 OUR TEAM
               </h3>
               <p className="text-foreground/80 font-light leading-relaxed mb-8 text-center">
-              Ciao India Tours has a passionate team of multilingual professionals fluent in English, Italian, Spanish, French, German, and more. We are dedicated to providing excellent, innovative, and unforgettable travel experiences for our clients.</p>
+              <strong>Ciao India Tours</strong> has a passionate team of multilingual professionals fluent in English, Italian, Spanish, French, German, and more. We are dedicated to providing excellent, innovative, and unforgettable luxury travel experiences across India for our clients.</p>
               
               {/* Team Members */}
               <div className="grid md:grid-cols-3 gap-8 mt-12">
@@ -398,15 +409,15 @@ const Homepage = () => {
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section id="faq" className="py-24 px-6">
+        {/* FAQ Section */}
+        <section id="faq" className="py-24 px-6" aria-label="Ciao India Tours Frequently Asked Questions">
         <div className="max-w-4xl mx-auto">
           <motion.div
             data-aos="fade-up"
             className="text-center mb-16"
           >
             <h2 className="text-4xl md:text-5xl font-light tracking-tighter text-foreground mb-6">
-              Frequently Asked <span className="text-primary font-medium">Questions</span>
+              <span className="text-primary font-medium">Ciao India Tours</span> FAQ
             </h2>
             <div className="w-24 h-1 bg-gradient-primary mx-auto rounded-full mb-8"></div>
           </motion.div>
@@ -455,31 +466,32 @@ const Homepage = () => {
         </div>
       </section>
 
-      {/* Contact Modal */}
-      <ContactModal 
-        isOpen={isContactModalOpen} 
-        onClose={() => setIsContactModalOpen(false)} 
-      />
-
-      {/* Quotation Modal */}
-      <QuotationModal 
-        isOpen={isQuotationModalOpen} 
-        onClose={() => setIsQuotationModalOpen(false)} 
-      />
-
-      {/* Sub Tour Grid */}
-      {selectedTourCategory && (
-        <SubTourGrid 
-          isOpen={isSubTourGridOpen}
-          onClose={() => setIsSubTourGridOpen(false)}
-          tours={tourCategories.find(cat => cat.id === selectedTourCategory)?.subTours || []}
-          categoryTitle={tourCategories.find(cat => cat.id === selectedTourCategory)?.title || ''}
-          onTourSelect={(tour) => {
-            window.open(`/tours/${selectedTourCategory}/${tour.id}`, '_blank');
-          }}
+        {/* Contact Modal */}
+        <ContactModal 
+          isOpen={isContactModalOpen} 
+          onClose={() => setIsContactModalOpen(false)} 
         />
-      )}
-      <Footer  />
+
+        {/* Quotation Modal */}
+        <QuotationModal 
+          isOpen={isQuotationModalOpen} 
+          onClose={() => setIsQuotationModalOpen(false)} 
+        />
+
+        {/* Sub Tour Grid */}
+        {selectedTourCategory && (
+          <SubTourGrid 
+            isOpen={isSubTourGridOpen}
+            onClose={() => setIsSubTourGridOpen(false)}
+            tours={tourCategories.find(cat => cat.id === selectedTourCategory)?.subTours || []}
+            categoryTitle={tourCategories.find(cat => cat.id === selectedTourCategory)?.title || ''}
+            onTourSelect={(tour) => {
+              window.open(`/tours/${selectedTourCategory}/${tour.id}`, '_blank');
+            }}
+          />
+        )}
+        <Footer  />
+      </main>
     </div>
   );
 };
